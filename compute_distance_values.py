@@ -31,6 +31,26 @@ def normalized_cross_correlation(image1, image2):
     return np.mean(ncc)
 
 
+def compute_bhattacharyya_distance(image1, image2, range_min=-3, range_max=3, num_bins=61):
+    # Z-score normalization
+    mean1, std1 = np.mean(image1), np.std(image1)
+    mean2, std2 = np.mean(image2), np.std(image2)
+
+    zscore_normalized_image1 = (image1 - mean1) / std1
+    zscore_normalized_image2 = (image2 - mean2) / std2
+
+    # Create histograms
+    hist1, bin_edges1 = np.histogram(zscore_normalized_image1, bins=num_bins, range=(range_min, range_max))
+    hist2, bin_edges2 = np.histogram(zscore_normalized_image2, bins=num_bins, range=(range_min, range_max))
+
+    # Calculate the Bhattacharyya distance
+    hist1 = hist1 / np.sum(hist1)  # Normalize histograms
+    hist2 = hist2 / np.sum(hist2)
+
+    b_distance = -np.log(np.sum(np.sqrt(hist1 * hist2)))
+
+    return b_distance
+
 for DAY in DAYS:
     for PA_OR_US in PA_OR_USS:
         DATA_PATH = fr"D:\erlangen_data\{DAY}. Runde/"
@@ -61,7 +81,8 @@ for DAY in DAYS:
                         data[operator][site][subject] = dict({
                             "ssim": [],
                             "MAE": [],
-                            "NCC": []
+                            "NCC": [],
+                            "BD": [],
                         })
 
                     for reference in REPETITIONS:
@@ -96,7 +117,11 @@ for DAY in DAYS:
                             ncc = normalized_cross_correlation(reference_image, pa_data)
                             data[operator][site][subject]["NCC"].append(float(ncc))
 
-                            print(reference, "-", i, f"= SSIM:{ssim:.2f} MAE:{mae:.2f} NCC:{ncc:.2f}")
+                            # Compute NCC
+                            bd = compute_bhattacharyya_distance(reference_image, pa_data)
+                            data[operator][site][subject]["BD"].append(float(bd))
+
+                            print(reference, "-", i, f"= SSIM:{ssim:.2f} MAE:{mae:.2f} NCC:{ncc:.2f} BD:{bd * 100:.2f}")
 
         with open(f"{DATA_PATH}/ssim_scores_{PA_OR_US}.json", "w+") as json_file:
             json.dump(data, json_file)
