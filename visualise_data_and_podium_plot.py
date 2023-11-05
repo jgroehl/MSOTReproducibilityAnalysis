@@ -6,8 +6,8 @@ from scipy.stats import wilcoxon
 PA_OR_US = ["PA", "US"]
 DAY = ["1", "2"]
 PATH = r"D:\erlangen_data/"
-SCORE = "ssim"
-BIGGER_IS_BETTER = True
+SCORE = "BD" # "BD", "MAE", "ssim", "NCC"
+BIGGER_IS_BETTER = False
 OPERATOR_LABELS = ["Experienced", "Experienced", "Novice", "Novice", "Trained"]
 
 for day in DAY:
@@ -38,9 +38,9 @@ for day in DAY:
                         else:
                             sample = np.random.choice(_sample_data, int(len(_sample_data)/2), replace=True)
                         if BIGGER_IS_BETTER:
-                            task_performances[operator-1].append(np.mean(sample))
+                            task_performances[operator-1].append(np.median(sample))
                         else:
-                            task_performances[operator - 1].append(-np.mean(sample))
+                            task_performances[operator - 1].append(-np.median(sample))
 
         print(f"Day {day}, based on {paus}:  {np.mean(task_performances)*100:.2f} +/- "
               f"{np.std(task_performances)*100:.2f}")
