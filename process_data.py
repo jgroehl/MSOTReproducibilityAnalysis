@@ -11,6 +11,7 @@ from path import BASE_DATA_PATH
 
 READ_PATH = r"E:/"
 WRITE_PATH = BASE_DATA_PATH
+WRITE_PATH_FULL = BASE_DATA_PATH + "/full_data/"
 
 rounds = glob.glob(READ_PATH + "*Runde*/")
 print(rounds)
@@ -50,10 +51,20 @@ for round in rounds:
             if not os.path.exists(write_path):
                 os.makedirs(write_path)
 
+            write_path_full = measurement.replace(READ_PATH, WRITE_PATH_FULL)
+            if not os.path.exists(write_path_full):
+                os.makedirs(write_path_full)
+
             us_data = pa_data.get_ultrasound()
 
-            us_data = np.flipud(np.squeeze(np.mean(us_data.raw_data[:, 3], axis=0)))
-            pa_data = np.flipud(np.squeeze(np.mean(reconstruction.raw_data[:, 3], axis=0)))
+            us_data_avg = np.flipud(np.squeeze(np.mean(us_data.raw_data[:, 3], axis=0)))
+            pa_data_avg = np.flipud(np.squeeze(np.mean(reconstruction.raw_data[:, 3], axis=0)))
 
-            np.save(write_path + f"/Scan_{scan_idx+1}_US.npy", us_data)
-            np.save(write_path + f"/Scan_{scan_idx + 1}_PA.npy", pa_data)
+            np.save(write_path + f"/Scan_{scan_idx+1}_US.npy", us_data_avg)
+            np.save(write_path + f"/Scan_{scan_idx + 1}_PA.npy", pa_data_avg)
+
+            us_data_all = np.flip(us_data.raw_data[::3, 0:1, :, 0, :], axis=2)
+            pa_data_all = np.flip(reconstruction.raw_data[::3, :, :, 0, :], axis=2)
+
+            np.save(write_path_full + f"/Scan_{scan_idx + 1}_US.npy", us_data_all)
+            np.save(write_path_full + f"/Scan_{scan_idx + 1}_PA.npy", pa_data_all)

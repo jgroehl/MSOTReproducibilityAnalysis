@@ -24,5 +24,6 @@ ax2.axis("off")
 scalebar = ScaleBar(0.2, "mm", location="lower left")
 ax2.add_artist(scalebar)
 
-plt.savefig("example_data.png", dpi=200)
+#plt.savefig("example_data.png", dpi=200)
+plt.show()
 plt.close()

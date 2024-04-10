@@ -18,7 +18,7 @@ Ulrich Rother<sup>1*</sup>
 
 <sup>#</sup> ,<sup>*</sup> Contributed equally
 
-####Affiliations
+###Affiliations
 
 1 Department of Vascular Surgery, University Hospital Erlangen, 
 Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), 
@@ -51,7 +51,9 @@ D-91052 Erlangen, Germany
 
 ## Installing
 
-Download this repository from github and download the corresponding data from zenodo.
+Download this repository from github and download the corresponding data from zenodo
+(https://doi.org/10.5281/zenodo.10957316).
+
 Create a new virtual environment and install the requirements listet in `requirements.txt`, 
 for example, using `pip`:
 
@@ -97,3 +99,10 @@ operators for the first imaging session compared to the second imaging session.
 point to qualitatively assess the difference between an expert, novice and trained 
 operator.
 `visualise_example_data.py` visualises a PA + US data pair.
+
+The operators recorded for 49 frames at each location and by default, 
+the analysis is performed on the average reconstruction over those frames.
+Additionally, PA imaging was performed over 6 wavelengths:
+[700, 730, 760, 800, 850, 900] nanometers but only 800nm was chosen for the analysis. 
+However, every third frame and all wavelengths are included in the zenodo data archive
+and can also be used for other research purposes at the users discretion.
