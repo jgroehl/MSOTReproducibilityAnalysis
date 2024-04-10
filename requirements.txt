@@ -2,3 +2,4 @@ patato
 torchmetrics
 torch
 matplotlib-scalebar
+numpy

@@ -11,7 +11,7 @@ OPERATOR_LABELS = ["Experienced", "Experienced", "Novice", "Novice", "Trained"]
 
 for day in DAY:
     print(f"Experiment {day}")
-    with open(rf"{PATH}\{day}. Runde/ssim_scores_PA.json", "r+") as json_file:
+    with open(rf"{PATH}\{day}. Runde/ssim_scores_US.json", "r+") as json_file:
         data = json.load(json_file)
         OPERATORS = [1, 2, 3, 4, 5]
         SITE = ["L", "R"]
