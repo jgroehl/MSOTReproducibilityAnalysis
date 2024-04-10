@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib_scalebar.scalebar import ScaleBar
+from path import BASE_DATA_PATH
 
 MAXIMUM = 8
 MINIMUM = 1
@@ -18,11 +19,11 @@ us_datas_experienced = []
 us_datas_novice = []
 us_datas_trained = []
 for i in range(1, 8):
-    PATH = rf"D:\erlangen_data\1. Runde\{SUBJECT}-001"
+    PATH = rf"{BASE_DATA_PATH}\1. Runde\{SUBJECT}-001"
     us_datas_experienced.append(np.load(PATH + f"/Scan_{str(i)}_US.npy")[50:150, 5:-5])
-    PATH = rf"D:\erlangen_data\1. Runde\{SUBJECT}-003"
+    PATH = rf"{BASE_DATA_PATH}\1. Runde\{SUBJECT}-003"
     us_datas_novice.append(np.load(PATH + f"/Scan_{str(i)}_US.npy")[50:150, 5:-5])
-    PATH = rf"D:\erlangen_data\1. Runde\{SUBJECT}-005"
+    PATH = rf"{BASE_DATA_PATH}\1. Runde\{SUBJECT}-005"
     us_datas_trained.append(np.load(PATH + f"/Scan_{str(i)}_US.npy")[50:150, 5:-5])
 us_datas_experienced = np.asarray(us_datas_experienced)
 us_datas_novice = np.asarray(us_datas_novice)
@@ -36,11 +37,11 @@ us_datas_experienced_day2 = []
 us_datas_novice_day2 = []
 us_datas_trained_day2 = []
 for i in range(1, 8):
-    PATH = rf"D:\erlangen_data\2. Runde\{SUBJECT}-001"
+    PATH = rf"{BASE_DATA_PATH}\2. Runde\{SUBJECT}-001"
     us_datas_experienced_day2.append(np.load(PATH + f"/Scan_{str(i)}_US.npy")[50:150, 5:-5])
-    PATH = rf"D:\erlangen_data\2. Runde\{SUBJECT}-003"
+    PATH = rf"{BASE_DATA_PATH}\2. Runde\{SUBJECT}-003"
     us_datas_novice_day2.append(np.load(PATH + f"/Scan_{str(i)}_US.npy")[50:150, 5:-5])
-    PATH = rf"D:\erlangen_data\2. Runde\{SUBJECT}-005"
+    PATH = rf"{BASE_DATA_PATH}\2. Runde\{SUBJECT}-005"
     us_datas_trained_day2.append(np.load(PATH + f"/Scan_{str(i)}_US.npy")[50:150, 5:-5])
 us_datas_experienced_day2 = np.asarray(us_datas_experienced_day2)
 us_datas_novice_day2 = np.asarray(us_datas_novice_day2)

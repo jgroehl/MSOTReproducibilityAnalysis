@@ -1,5 +1,6 @@
 from torchmetrics.image import StructuralSimilarityIndexMeasure
 from scipy.signal import correlate2d
+from path import BASE_DATA_PATH
 import numpy as np
 import os.path
 import torch
@@ -53,7 +54,7 @@ def compute_bhattacharyya_distance(image1, image2, range_min=-3, range_max=3, nu
 
 for DAY in DAYS:
     for PA_OR_US in PA_OR_USS:
-        DATA_PATH = fr"D:\erlangen_data\{DAY}. Runde/"
+        DATA_PATH = fr"{BASE_DATA_PATH}\{DAY}. Runde/"
 
         OPERATORS = ["1", "2", "3", "4", "5"]
         SITE = ["L", "R"]

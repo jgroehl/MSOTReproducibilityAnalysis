@@ -1,13 +1,19 @@
-import matplotlib.pyplot as plt
+# This script is essentially useless to others, but we included it for
+# transparency as it shows how we processed and reconstructed the
+# measurement data from the raw data. Unfortunately, the raw time series
+# data measurements are > 300GB in total and thus not easily sharable.
+
 import patato as pat
 import numpy as np
 import glob
 import os
+from path import BASE_DATA_PATH
 
 READ_PATH = r"E:/"
-WRITE_PATH = r"D:\erlangen_data/"
+WRITE_PATH = BASE_DATA_PATH
 
-rounds = glob.glob(READ_PATH + "2. Runde*/")
+rounds = glob.glob(READ_PATH + "*Runde*/")
+print(rounds)
 
 for round in rounds:
 
@@ -45,23 +51,6 @@ for round in rounds:
                 os.makedirs(write_path)
 
             us_data = pa_data.get_ultrasound()
-
-            # plt.subplot(2, 3, 1)
-            # plt.imshow(np.flipud(np.squeeze(us_data.raw_data[0, 3])), cmap="gray")
-            # # plt.imshow(np.flipud(np.squeeze(reconstruction.raw_data[0, 3])), alpha=0.5, cmap="magma")
-            # plt.subplot(2, 3, 2)
-            # plt.imshow(np.flipud(np.squeeze(np.mean(us_data.raw_data[:, 3], axis=0))), cmap="gray")
-            # plt.imshow(np.flipud(np.squeeze(np.mean(reconstruction.raw_data[:, 3], axis=0))), alpha=0.5, cmap="magma")
-            # plt.subplot(2, 3, 3)
-            # plt.imshow(np.flipud(np.squeeze(np.std(us_data.raw_data[:, 3], axis=0))))
-            # plt.subplot(2, 3, 4)
-            # plt.imshow(np.flipud(np.squeeze(reconstruction.raw_data[0, 3])))
-            # plt.subplot(2, 3, 5)
-            # plt.imshow(np.flipud(np.squeeze(np.mean(reconstruction.raw_data[:, 3], axis=0))))
-            # plt.subplot(2, 3, 6)
-            # plt.imshow(np.flipud(np.squeeze(np.std(reconstruction.raw_data[:, 3], axis=0))))
-            #
-            # plt.show()
 
             us_data = np.flipud(np.squeeze(np.mean(us_data.raw_data[:, 3], axis=0)))
             pa_data = np.flipud(np.squeeze(np.mean(reconstruction.raw_data[:, 3], axis=0)))

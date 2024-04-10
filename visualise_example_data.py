@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib_scalebar.scalebar import ScaleBar
+from path import BASE_DATA_PATH
 
-PATH = r"D:\erlangen_data\1. Runde\1-02-L-001/"
+PATH = rf"{BASE_DATA_PATH}\1. Runde\1-01-L-001/"
 us_data = np.load(PATH + "Scan_1_US.npy")[50:150, 5:-5]
 pa_data = np.load(PATH + "Scan_1_PA.npy")[50:150, 5:-5]
 

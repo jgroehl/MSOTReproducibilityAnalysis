@@ -1,5 +1,5 @@
-patato
-torchmetrics
-torch
-matplotlib-scalebar
-numpy
+patato==0.5.12
+torchmetrics==1.2.0
+torch==2.1.0
+matplotlib-scalebar==0.8.1
+numpy==1.24.4

@@ -2,10 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import json
 from scipy.stats import wilcoxon
+from path import BASE_DATA_PATH
 
-PATH = r"D:\erlangen_data/"
+PATH = BASE_DATA_PATH
 
-PA_OR_US = ["PA"] #"US"
+PA_OR_US = ["PA"]
 DAY = ["1", "2"]
 SCORES = ["BD", "MAE", "ssim", "NCC"]
 BIGGER_IS_BETTER_S = [False, False, True, True]
